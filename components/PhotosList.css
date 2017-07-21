@@ -1,0 +1,21 @@
+ul {
+  list-style-type: none;
+  /*padding: 0;*/
+  column-count: 4;
+  column-gap: 1em;
+}
+
+img{
+  display: inline-block;
+  background: #fff;
+  padding: 0.8em;
+  margin: 0 0 1.5em;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 4px 0 #ccc;
+/*margin-left: 20px;*/
+  border-radius: 5%;
+}
+img:hover{
+  opacity: .5;
+}
