@@ -1,47 +1,76 @@
 import React, { Component } from 'react'
-import SearchInput from './SearchInput'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../redux/actions'
-import PhotosList from './PhotosList'
-import {InstantSearch, Hits, SearchBox} from 'react-instantsearch/dom';
-import ReactDOM from 'react-dom';
+import Header from './Header'
+import {InstantSearch, Hits, SearchBox, Highlight,
+    Pagination, CurrentRefinements, ClearAll} from 'react-instantsearch/dom';
+import '../client/styles.css';
+//import ReactDOM from 'react-dom';
+//import Modal from 'reacat-modal';
+
+
+function Photo({hit}){
+    return (
+        <li>
+            <img className="masonry-element" src={hit.url} />
+            <div className="photo-title">
+                <Highlight attributeName="title" hit={hit} />
+            </div>
+        </li>
+    );
+}
+
+function Search() {
+    return (
+        <div>
+            <ul className="masonry">
+                <Hits hitComponent={Photo} />
+            </ul>
+            <Pagination/>
+        </div>
+    );
+}
 
 class App extends Component {
 
-  render() {
-    return (
-      <div class="app">
-        <h1>Photos List</h1>
-        <SearchInput addTodo={this.props.actions.addTodo}/>
-        <PhotosList photos={this.props.photos} getPhotos={this.props.actions.getPhotos}/>
-      </div>
+  constructor(props) {
+      super(props);
+      var client = algoliasearch("ZUDPYST9BD", "09959dfba3d75caf63d1c754ad00334a");
+      client.initIndex('Photo');
+
+      // this.state = {
+      // modalIsOpen: false
+      // };
+      //
+      // this.openModal = this.openModal.bind(this);
+      // this.afterOpenModal = this.afterOpenModal.bind(this);
+      // this.closeModal = this.closeModal.bind(this);
+  }
+
+
+  render(){
+
+    return(
+        <div>
+        <Header />
+            <div className="wrapper">
+                <InstantSearch
+                    appId="ZUDPYST9BD"
+                    apiKey="01aabc2f70dc96cf941b8d55aaa5b7af"
+                    indexName="Photo"
+                >
+                  <SearchBox/>
+                  <Search/>
+                </InstantSearch>
+            </div>
+         </div>
     )
-    /*return(
-    <div>
-        <h1>Photos List</h1>
-        <InstantSearch
-            appId="latency"
-            apiKey="3d9875e51fbd20c7754e65422f7ce5e1"
-            indexName="bestbuy"
-        >
-           <SearchBox/>
-            <div>
-              <Hits />
-           </div>
-        </InstantSearch>
-    </div>
-    )*/
   }
 
 }
 
-//ALGOLIA IMPORT DATA
-var client = algoliasearch("ZUDPYST9BD", "09959dfba3d75caf63d1c754ad00334a");
-var index = client.initIndex('flickrPhotos');
-index.addObjects(this.props.photos, function(err, content){
-    console.log(content);
-});
+
 
 
 function mapStateToProps(state) {

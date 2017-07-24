@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 
+var checking;
 class PhotosList extends Component{
+
     componentWillMount() {
         this.props.getPhotos()
+        checking=true;
     }
 
     render(){
+
         if(Array.isArray(this.props.photos)) {
+
             return (
                 <ul>
                     {
