@@ -1,70 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import actions from '../redux/actions'
 import Header from './Header'
 import {InstantSearch, Hits, SearchBox, Highlight,
     Pagination, CurrentRefinements, ClearAll} from 'react-instantsearch/dom';
 import '../client/styles.css';
-//import ReactDOM from 'react-dom';
-//import Modal from 'reacat-modal';
+import { BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
+import MainWindow from './MainWindow';
 
 
-function Photo({hit}){
-    return (
-        <li>
-            <img className="masonry-element" src={hit.url} />
-            <div className="photo-title">
-                <Highlight attributeName="title" hit={hit} />
-            </div>
-        </li>
-    );
-}
 
-function Search() {
+const PhotoWindow = ({match}) => {
     return (
         <div>
-            <ul className="masonry">
-                <Hits hitComponent={Photo} />
-            </ul>
-            <Pagination/>
+            <img className="clickedPhoto" src={this.props.photos.find( p => p.photo_id===match.params.photoId ).url}/>
+            <Link to="/" >
+                <FontAwesome className="backButton" name="backward" size="3x"/>
+            </Link>
         </div>
     );
 }
 
-class App extends Component {
 
+class App extends Component {
   constructor(props) {
       super(props);
       var client = algoliasearch("ZUDPYST9BD", "09959dfba3d75caf63d1c754ad00334a");
       client.initIndex('Photo');
-
-      // this.state = {
-      // modalIsOpen: false
-      // };
-      //
-      // this.openModal = this.openModal.bind(this);
-      // this.afterOpenModal = this.afterOpenModal.bind(this);
-      // this.closeModal = this.closeModal.bind(this);
   }
-
-
   render(){
 
     return(
-        <div>
-        <Header />
-            <div className="wrapper">
-                <InstantSearch
-                    appId="ZUDPYST9BD"
-                    apiKey="01aabc2f70dc96cf941b8d55aaa5b7af"
-                    indexName="Photo"
-                >
-                  <SearchBox/>
-                  <Search/>
-                </InstantSearch>
-            </div>
-         </div>
+        <Router>
+          <div>
+              <Header />
+              <Route exact={true} path="/" component={MainWindow}/>
+              <Route path="/:photoId" component={PhotoWindow} />
+          </div>
+        </Router>
     )
   }
 

@@ -1,24 +1,4 @@
 let actions = {
-  addTodo: function(text) {
-    return {
-      type: 'ADD_TODO',
-      text: text
-    }
-  },
-
-  completeTodo: function(id){
-    return {
-      type: 'COMPLETE_TODO',
-      id: id
-    }
-  },
-
-  deleteTodo: function(id) {
-    return {
-      type: 'DELETE_TODO',
-      id: id
-    }
-  },
 
   createNewUserId: function(){
     return {
@@ -65,7 +45,15 @@ let actions = {
                 console.error(error);
             })
     }
+  },
+
+  addPhoto: function(photo){
+      return {
+          type: 'ADD_PHOTO',
+          photo: photo
+      }
   }
+
 }
 
 export default actions

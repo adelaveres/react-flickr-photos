@@ -55,6 +55,11 @@ let reducer = function(state, action) {
           })
         })
 
+      case 'ADD_PHOTO':
+        return Object.assign({}, state, {
+          photos: [action.photo, ...state.photos]
+        })
+
     default: 
       return state;
   }
