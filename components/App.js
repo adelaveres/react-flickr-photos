@@ -11,17 +11,30 @@ import FontAwesome from 'react-fontawesome';
 import MainWindow from './MainWindow';
 
 
+const PhotoWindow = ({ match, photos }) => {
 
-const PhotoWindow = ({match}) => {
     return (
         <div>
-            <img className="clickedPhoto" src={this.props.photos.find( p => p.photo_id===match.params.photoId ).url}/>
+            <img className="clickedPhoto" src={photos.find( p => p.photo_id===match.params.photoId ).url}/>
             <Link to="/" >
                 <FontAwesome className="backButton" name="backward" size="3x"/>
             </Link>
         </div>
     );
 }
+
+
+function mapStateToProps(state) {
+  return state
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+const connectedPhotoWindow = connect(mapStateToProps, mapDispatchToProps)(PhotoWindow)
 
 
 class App extends Component {
@@ -37,7 +50,7 @@ class App extends Component {
           <div>
               <Header />
               <Route exact={true} path="/" component={MainWindow}/>
-              <Route path="/:photoId" component={PhotoWindow} />
+              <Route path="/:photoId" component={connectedPhotoWindow} />
           </div>
         </Router>
     )
@@ -45,17 +58,5 @@ class App extends Component {
 
 }
 
-
-
-
-function mapStateToProps(state) {
-  return state
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

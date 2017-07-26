@@ -7,20 +7,21 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import { bindActionCreators } from 'redux';
 
+
 class Photo extends Component {
 
-    componentWilMount(){
-        actions.addPhoto({hit})
+    componentDidMount() {
+        this.props.actions.addPhoto(this.props.hit)
     }
 
     render() {
-        return (
+       return (
             <li>
-                <Link to={hit.photo_id}>
-                    <img className="masonry-element" src={hit.url}/>
+                <Link to={this.props.hit.photo_id}>
+                    <img className="masonry-element" src={this.props.hit.url}/>
                 </Link>
                 <div className="photo-title">
-                    <Highlight attributeName="title" hit={hit}/>
+                    <Highlight attributeName="title" hit={this.props.hit}/>
                 </div>
             </li>
         );
@@ -33,7 +34,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(Object.assign({}, actions), dispatch)
+        actions: bindActionCreators(actions, dispatch)
     }
 }
 
