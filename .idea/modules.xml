@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../django_photos_app/.idea/django_photos_app.iml" filepath="$PROJECT_DIR$/../django_photos_app/.idea/django_photos_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../python_image_processing/.idea/python_image_processing.iml" filepath="$PROJECT_DIR$/../python_image_processing/.idea/python_image_processing.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/react-flickr-photos.iml" filepath="$PROJECT_DIR$/.idea/react-flickr-photos.iml" />
     </modules>
   </component>

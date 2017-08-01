@@ -3,11 +3,21 @@
       margin: 0;
       background: #e9e9e9;
     }
-    .wrapper{
-        width: 85%;
-        margin: 8em auto;
-      }
-    .masonry{
+  .header{
+      background-color: darkcyan;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding:  1px 0 1px 20px;
+      font-size: x-large;
+      font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+
+  }
+  .wrapper{
+      width: 85%;
+      margin: 10em 280px 10em 280px;
+  }
+  .masonry{
       list-style-type: none;
       padding: 0;
       margin: 4em 0;
@@ -17,14 +27,27 @@
   }
   .masonry-element{
       display: inline-block;
-      background: #fff;
-      padding: 0.8em;
       margin: 1em 0 1em;
       width: 100%;
+  }
+  .photo-masonry{
+      background: #fff;
+      padding: 0.8em;
       box-sizing: border-box;
       -webkit-box-sizing: border-box;
       box-shadow: 2px 2px 4px 0 #ccc;
       border-radius: 5%;
+  }
+  .sidebar{
+      position: fixed;
+      overflow-y: auto;
+      top: 122px;
+      left: 0;
+      bottom: 0;
+      width: 230px;
+      padding: 20px;
+      border-right: 2px solid #EEE;
+      background: #e9e9e9;
   }
   img:hover{
       opacity: .5;
@@ -34,21 +57,41 @@
       font-family: 'Dancing Script', cursive;
       font-size: x-large;
   }
-  .header{
-      background-color: darkcyan;
-      padding:  1px 0 1px 20px;
-      font-size: x-large;
-      font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 
-  }
   .clickedPhoto{
-      margin: 5em 35%;
+      margin: 10em 35%;
       width: 30%;
   }
   .backButton{
       margin: 0 49%;
       color: midnightblue;
   }
+  .refinementList{
+      list-style-type: none;
+  }
+  .ais-RefinementList__showMore {
+      font-size: large;
+      box-sizing: border-box;
+  }
+  .ais-Pagination__root {
+      margin: 0 30%;
+      width: 40%;
+  }
+  .color_box{
+      width: 28px;
+      height: 28px;
+      margin: 6px;
+      box-sizing: border-box;
+      /*box-shadow: 2px 2px 4px 0 #ccc;*/
+      border-radius: 20%;
+      overflow-y: auto;
+      float: left;
+  }
+
+  .checked{
+      box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.5);
+  }
+
   em{
       color: aqua;
   }
@@ -59,14 +102,14 @@
       }
   }
 
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 2300px) {
       ul {
           -webkit-column-count: 3;
           column-count: 3;
       }
   }
 
-  @media only screen and (min-width: 2100px) {
+  @media only screen and (min-width: 2500px) {
       ul {
           -webkit-column-count: 4;
           column-count: 4;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {InstantSearch, Hits, SearchBox, Highlight,
-    Pagination, CurrentRefinements, ClearAll} from 'react-instantsearch/dom';
+import {InstantSearch, RefinementList, Hits, SearchBox, Highlight,
+    Pagination, CurrentRefinements, ClearAll } from 'react-instantsearch/dom';
+import { connectRefinementList } from 'react-instantsearch/connectors';
 import '../client/styles.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -16,9 +17,9 @@ class Photo extends Component {
 
     render() {
        return (
-            <li>
+            <li className="masonry-element">
                 <Link to={this.props.hit.photo_id}>
-                    <img className="masonry-element" src={this.props.hit.url}/>
+                    <img className="photo-masonry" src={this.props.hit.url}/>
                 </Link>
                 <div className="photo-title">
                     <Highlight attributeName="title" hit={this.props.hit}/>
@@ -51,21 +52,56 @@ const Search = () => {
     );
 }
 
-class MainWindow extends Component {
+class CustomRefinementList extends Component {
+    render() {
+        console.log(this.props);
+        return (
+            <div>
+                <h2>Colors</h2>
+                <ul className="refinementList">
+                    {
+                        this.props.items && this.props.items.map(item => {
+                            var classNames=""
+                            if(item.isRefined){
+                                classNames="color_box checked"
+                            }
+                            else{
+                                classNames="color_box"
+                            }
+                            return <li className={classNames}
+                                    onClick={() => this.props.refine(item.value)}
+                                    style={{backgroundColor: item.label}}
+                                    checked={item.isRefined}
+                                    />
+                        })
+                    };
+                </ul>
+            </div>
+        );
+    }
+};
 
+const NewRefinementList = connectRefinementList(CustomRefinementList);
+class MainWindow extends Component {
 
     render() {
         return (
-            <div className="wrapper">
-                <InstantSearch
-                    appId="ZUDPYST9BD"
-                    apiKey="01aabc2f70dc96cf941b8d55aaa5b7af"
-                    indexName="Photo"
-                >
+
+            <InstantSearch
+                appId="ZUDPYST9BD"
+                apiKey="01aabc2f70dc96cf941b8d55aaa5b7af"
+                indexName="Photo">
+
+                <div className="sidebar">
+                    <NewRefinementList attributeName="colors" />
+                </div>
+
+                <div className="wrapper">
                     <SearchBox/>
                     <Search/>
-                </InstantSearch>
-            </div>
+                </div>
+
+            </InstantSearch>
         );
     }
 }
