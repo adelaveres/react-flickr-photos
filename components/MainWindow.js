@@ -88,8 +88,8 @@ class MainWindow extends Component {
         return (
 
             <InstantSearch
-                appId="ZUDPYST9BD"
-                apiKey="01aabc2f70dc96cf941b8d55aaa5b7af"
+                appId="7ZLXFKJ9DV"
+                apiKey="744d5ae9e6ec943e2667327f287dfe12"
                 indexName="Photo">
 
                 <div className="sidebar">

@@ -9,7 +9,7 @@ let finalCreateStore = compose(
 )(createStore)
 
 
-export default function configureStore(initialState = { todos: [] }) {
+export default function configureStore(initialState) {
   const state = Object.assign({}, window.__REDUX_DEVTOOLS_EXTENSION__(), initialState);
   return finalCreateStore(reducer, state);
 }

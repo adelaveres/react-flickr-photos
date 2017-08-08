@@ -1,44 +1,5 @@
-function getId(state) {
-  return state.todos.reduce((maxId, todo) => {
-    return Math.max(todo.id, maxId)
-  }, -1) + 1
-}
-
-
 let reducer = function(state, action) {
   switch (action.type) {
-    case 'ADD_TODO':
-      return Object.assign({}, state, {
-        todos: [{
-          text: action.text,
-          completed: false,
-          id: getId(state)
-        }, ...state.todos]
-      })
-
-    case 'COMPLETE_TODO':
-      return Object.assign({}, state, {
-        todos: state.todos.map( (todo)=> {
-          return todo.id === action.id ?
-              Object.assign({}, todo, {completed: !todo.completed}) : todo
-        })
-      })
-
-
-    case 'DELETE_TODO':
-      return Object.assign({}, state, {
-        todos: state.todos.filter( (todo)=> {
-          return todo.id !== action.id ? true : false
-        })
-      })
-
-    case 'CREATE_USER_ID':
-      return Object.assign({}, state, {
-        user: {
-          username: state.user.username,
-          id: action.id
-        }
-      })
 
     case 'GET_PHOTOS':
       return Object.assign({}, state, {
@@ -58,6 +19,16 @@ let reducer = function(state, action) {
       case 'ADD_PHOTO':
         return Object.assign({}, state, {
           photos: [action.photo, ...state.photos]
+        })
+
+      case 'STORE_EXCHANGED_TOKEN':
+        return Object.assign({}, state, {
+          token: action.token
+        })
+
+      case 'LOGIN':
+        return Object.assign({}, state, {
+          loggedIn : true
         })
 
     default: 
